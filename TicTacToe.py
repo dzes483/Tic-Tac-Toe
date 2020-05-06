@@ -1,10 +1,12 @@
 #! python3
 # TicTacToe.py - A basic Tic-Tac-Toe game.
 
+import random
+
 # Create an empty board
 board = ['#',' ',' ',' ',' ',' ',' ',' ',' ',' ']
 
-# Create the board layout (dividers)
+# Function to create the board layout (dividers)
 def display_board(board):
     print(board[1]+' ┃'+board[2]+' ┃'+board[3])
     print(''+ '━━''╋'+'━━'+'╋'+ '━━')
@@ -12,7 +14,7 @@ def display_board(board):
     print(''+ '━━''╋'+'━━'+'╋'+ '━━')
     print(board[7]+' ┃'+board[8]+' ┃'+board[9])
 
-# Players choose their markers
+# Function to choose player markers
 def player_input():
     global marker
     global player2
@@ -31,10 +33,7 @@ def player_input():
 
     print(f'Player 2, you are {player2}. Let us begin!')
 
-
-
-import random
-
+# Function to decide who goes first by choosing a random number
 def who_goes_first():
     x = random.randint(0,1)
 
@@ -43,34 +42,23 @@ def who_goes_first():
     else:
         return('Player 2, you go first!')
 
-
-# In[5]:
-
-
-def place_marker_p2(board, player2, position):
-    board[position] = player2
-    return position
-
-
-# In[6]:
-
-
+# Function to define player 1's marker
 def place_marker(board, player1, position):
     board[position] = player1
     return board
 
 
-# In[7]:
+# Function to define player 2's marker
+def place_marker_p2(board, player2, position):
+    board[position] = player2
+    return position
 
-
+# Function to define an open space on the board
 def open_space(board,position):
     if board[position] != ' ':
         return False
 
-
-# In[8]:
-
-
+# Function to define player's choice of position
 def player_choice(board):
     position = 0
 

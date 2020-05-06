@@ -67,10 +67,7 @@ def player_choice(board):
 
     return position
 
-
-# In[ ]:
-
-
+# Function to check for wins
 def win_check(board,character):
 
     return((board[1] == character and board[2] == character and board[3] == character) ## across the top
@@ -83,9 +80,8 @@ def win_check(board,character):
     or (board[3] == character and board[6] == character and board[9] == character)) ## down right
 
 
-# In[ ]:
 
-
+# Function to check if the board is full
 def full_board():
 
     for p in board:
@@ -94,24 +90,20 @@ def full_board():
         else:
             return False
 
-
-# In[ ]:
-
-
+# Function to ask the players if they would like to play again
 def replay():
-
     return input('Do you want to play again?').lower().startswith('y')
 
 
-# In[ ]:
-
-
+# Start the game
 print('Welcome to Tic-Tac-Toe!')
 
 while True:
-    ## Reset the board
+    # Reset the board
     board = ['#',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+    # Choose player markers ('X' or 'O')
     player_input()
+    # Randomly decide who goes first
     turn = who_goes_first()
     lets_play = input('Are you ready to play? Type Yes or No: ')
     if lets_play.lower()[0] == 'y':
@@ -121,16 +113,22 @@ while True:
 
     while game:
         if turn == 'Player 1, you go first!':
+            # Display the current board
             display_board(board)
+            # Ask the player where they would like to place their marker
             player_choice(board)
+            # Place the marker based on the player's input
             place_marker(board, player1, position)
+            # Display the updated board
             diplay_board(board)
 
+            # Check if there is a win
             if win_check(board, player1):
                 display_board(board)
                 print("Congratulations, you've won the game!")
                 game = False
             else:
+                # Check if the board is full
                 if full_board(board):
                     display_board(board)
                     print("It's a draw!")
@@ -156,12 +154,3 @@ while True:
 
     if not replay():
         break
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:

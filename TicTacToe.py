@@ -8,30 +8,12 @@ board = ['#',' ',' ',' ',' ',' ',' ',' ',' ',' ']
 
 # Function to create the board layout (dividers)
 def display_board(board):
-    print(board[1]+' ┃'+board[2]+' ┃'+board[3])
-    print(''+ '━━''╋'+'━━'+'╋'+ '━━')
-    print(board[4]+' ┃'+board[5]+' ┃'+board[6])
-    print(''+ '━━''╋'+'━━'+'╋'+ '━━')
-    print(board[7]+' ┃'+board[8]+' ┃'+board[9])
+    print(board[1] + ' ┃' + board[2] + ' ┃' + board[3])
+    print('' + '━━''╋' + '━━' + '╋' + '━━')
+    print(board[4] + ' ┃' + board[5] + ' ┃' + board[6])
+    print('' + '━━''╋' + '━━' + '╋' + '━━')
+    print(board[7] +' ┃' + board[8] + ' ┃' + board[9])
 
-# Function to choose player markers
-def player_input():
-    global marker
-    global player2
-    global player1
-    marker = ''
-
-    while marker != 'X' and marker != 'O':
-        marker = input('Player 1, choose X or O: ')
-
-    player1 = marker
-
-    if marker == 'X':
-        player2 = 'O'
-    else:
-        player2 = 'X'
-
-    print(f'Player 2, you are {player2}. Let us begin!')
 
 # Function to decide who goes first by choosing a random number
 def who_goes_first():
@@ -83,7 +65,6 @@ def win_check(board,character):
 
 # Function to check if the board is full
 def full_board():
-
     for p in board:
         if ' ' not in board:
             return True
@@ -99,10 +80,22 @@ def replay():
 print('Welcome to Tic-Tac-Toe!')
 
 while True:
+
     # Reset the board
     board = ['#',' ',' ',' ',' ',' ',' ',' ',' ',' ']
     # Choose player markers ('X' or 'O')
-    player_input()
+    marker = ''
+    while marker != 'X' and marker != 'O':
+        marker = input('Player 1, choose X or O: ')
+
+    player1_sign = marker
+
+    if marker == 'X':
+        player2_sign = 'O'
+    else:
+        player2_sign = 'X'
+    print(f'Player 2, you are {player2_sign}. Let us begin!')
+    
     # Randomly decide who goes first
     turn = who_goes_first()
     lets_play = input('Are you ready to play? Type Yes or No: ')

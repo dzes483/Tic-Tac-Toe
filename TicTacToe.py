@@ -6,15 +6,6 @@ import random
 # Create an empty board
 board = ['#',' ',' ',' ',' ',' ',' ',' ',' ',' ']
 
-# Function to create the board layout (dividers)
-def display_board(board):
-    print(board[1] + ' ┃' + board[2] + ' ┃' + board[3])
-    print('' + '━━''╋' + '━━' + '╋' + '━━')
-    print(board[4] + ' ┃' + board[5] + ' ┃' + board[6])
-    print('' + '━━''╋' + '━━' + '╋' + '━━')
-    print(board[7] +' ┃' + board[8] + ' ┃' + board[9])
-
-
 # Function to decide who goes first by choosing a random number
 def who_goes_first():
     x = random.randint(0,1)
@@ -24,21 +15,18 @@ def who_goes_first():
     else:
         return('Player 2, you go first!')
 
-# Function to define player 1's marker
-def place_marker(board, player1, position):
-    board[position] = player1
-    return board
-
-
-# Function to define player 2's marker
-def place_marker_p2(board, player2, position):
-    board[position] = player2
-    return position
+# Function to create the board layout (dividers)
+def display_board(board):
+    print(board[1] + ' ┃' + board[2] + ' ┃' + board[3])
+    print('' + '━━''╋' + '━━' + '╋' + '━━')
+    print(board[4] + ' ┃' + board[5] + ' ┃' + board[6])
+    print('' + '━━''╋' + '━━' + '╋' + '━━')
+    print(board[7] +' ┃' + board[8] + ' ┃' + board[9])
 
 # Function to define an open space on the board
 def open_space(board,position):
-    if board[position] != ' ':
-        return False
+    if board[position] == ' ':
+        return True
 
 # Function to define player's choice of position
 def player_choice(board):
@@ -47,7 +35,19 @@ def player_choice(board):
     while position not in [1,2,3,4,5,6,7,8,9] or not open_space(board, position):
         position = int(input('Choose your next position: (1-9) '))
 
+    return board
+
+# Function to define player 1's marker
+def place_marker_p1(board, player1_sign, position):
+    board[position] = player1_sign
+    return board
+
+
+# Function to define player 2's marker
+def place_marker_p2(board, player2, position):
+    board[position] = player2
     return position
+
 
 # Function to check for wins
 def win_check(board,character):
@@ -95,7 +95,7 @@ while True:
     else:
         player2_sign = 'X'
     print(f'Player 2, you are {player2_sign}. Let us begin!')
-    
+
     # Randomly decide who goes first
     turn = who_goes_first()
     lets_play = input('Are you ready to play? Type Yes or No: ')
@@ -111,7 +111,7 @@ while True:
             # Ask the player where they would like to place their marker
             player_choice(board)
             # Place the marker based on the player's input
-            place_marker(board, player1, position)
+            place_marker_p1(board, player1_sign, position)
             # Display the updated board
             diplay_board(board)
 
@@ -131,7 +131,7 @@ while True:
         else:
             display_board(board)
             position = player_choice(board)
-            place_marker_p2(board, player2, position)
+            place_marker_p2(board, player2_sign, position)
 
             if win_check(board, player2):
                 display_board(board)

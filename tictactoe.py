@@ -42,30 +42,31 @@ def replay():
 # Start the game
 print('Welcome to Tic-Tac-Toe!')
 
-while True:
+# Reset the board. The '#' sign is a placeholder so that the position indices
+# can start from 1 instead of 0.
+board = ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 
-    # Reset the board
-    board = ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-    # Choose player markers ('X' or 'O')
-    marker = ''
-    while marker != 'X' and marker != 'O':
-        marker = input('Player 1, choose X or O: ')
+# Choose player markers ('X' or 'O')
+marker = ''
+while marker.upper() != 'X' and marker.upper() != 'O':
+    marker = input('Player 1, choose X or O: ')
 
-    player1_sign = marker
+player1_sign = marker
 
-    if marker == 'X':
-        player2_sign = 'O'
-    else:
-        player2_sign = 'X'
-    print(f'Player 2, you are {player2_sign}. Let us begin!')
+if marker == 'X':
+    player2_sign = 'O'
+else:
+    player2_sign = 'X'
+print(f'Player 2, you are {player2_sign}. Let us begin!')
 
-    # Randomly decide who goes first
-    turn = who_goes_first()
-    lets_play = input('Are you ready to play? Type Yes or No: ')
-    if lets_play.lower()[0] == 'y':
-        game = True
-    else:
-        game = False
+display_board(board)
+# Randomly decide who goes first
+turn = who_goes_first()
+lets_play = input('Are you ready to play? Type Yes or No: ')
+if lets_play.lower()[0] == 'y':
+    game = True
+else:
+    game = False
 
     while game:
         if turn == 'Player 1, you go first!':

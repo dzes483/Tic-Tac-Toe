@@ -1,10 +1,5 @@
-#! python3
+#!/usr/bin/python3
 # TicTacToe.py - A basic Tic-Tac-Toe game.
-
-import random
-
-# Create an empty board
-board = ['#',' ',' ',' ',' ',' ',' ',' ',' ',' ']
 
 # Function to decide who goes first by choosing a random number
 def who_goes_first():
@@ -15,38 +10,6 @@ def who_goes_first():
     else:
         return('Player 2, you go first!')
 
-# Function to create the board layout (dividers)
-def display_board(board):
-    print(board[1] + ' ┃' + board[2] + ' ┃' + board[3])
-    print('' + '━━''╋' + '━━' + '╋' + '━━')
-    print(board[4] + ' ┃' + board[5] + ' ┃' + board[6])
-    print('' + '━━''╋' + '━━' + '╋' + '━━')
-    print(board[7] +' ┃' + board[8] + ' ┃' + board[9])
-
-# Function to define an open space on the board
-def open_space(board,position):
-    if board[position] == ' ':
-        return True
-
-# Function to define player's choice of position
-def player_choice(board):
-    position = 0
-
-    while position not in [1,2,3,4,5,6,7,8,9] or not open_space(board, position):
-        position = int(input('Choose your next position: (1-9) '))
-
-    return board
-
-# Function to define player 1's marker
-def place_marker_p1(board, player1_sign, position):
-    board[position] = player1_sign
-    return board
-
-
-# Function to define player 2's marker
-def place_marker_p2(board, player2, position):
-    board[position] = player2
-    return position
 
 
 # Function to check for wins
@@ -82,7 +45,7 @@ print('Welcome to Tic-Tac-Toe!')
 while True:
 
     # Reset the board
-    board = ['#',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+    board = ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     # Choose player markers ('X' or 'O')
     marker = ''
     while marker != 'X' and marker != 'O':
@@ -109,11 +72,20 @@ while True:
             # Display the current board
             display_board(board)
             # Ask the player where they would like to place their marker
-            player_choice(board)
-            # Place the marker based on the player's input
-            place_marker_p1(board, player1_sign, position)
-            # Display the updated board
-            diplay_board(board)
+            while True:
+                position = int(input('Choose your next position: (1-9) '))
+                if position not in range(1,10):
+                    print('Pick a valid number (1-9)')
+                    continue
+                elif board[position] != ' ':
+                    print('Please pick an empty space.')
+                    continue
+                else:
+                    # Place the marker based on the player's input
+                    board[position] = player1_sign
+                    # Display the updated board
+                    diplay_board(board)
+                    break
 
             # Check if there is a win
             if win_check(board, player1):
@@ -129,9 +101,23 @@ while True:
                 else:
                     turn = 'Player 2, you go first!'
         else:
+            # Display the current board
             display_board(board)
-            position = player_choice(board)
-            place_marker_p2(board, player2_sign, position)
+            # Ask the player where they would like to place their marker
+            while True:
+                position = int(input('Choose your next position: (1-9) '))
+                if position not in range(1,10):
+                    print('Pick a valid number (1-9)')
+                    continue
+                elif board[position] != ' ':
+                    print('Please pick an empty space.')
+                    continue
+                else:
+                    # Place the marker based on the player's input
+                    board[position] = player2_sign
+                    # Display the updated board
+                    diplay_board(board)
+                    break
 
             if win_check(board, player2):
                 display_board(board)

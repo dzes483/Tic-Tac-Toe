@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# TicTacToe.py - A basic Tic-Tac-Toe game.
+# tictactoe.py - A basic Tic-Tac-Toe game.
 
 import random
 
